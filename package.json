@@ -1,0 +1,36 @@
+{
+  "name": "golden-lottery",
+  "version": "1.0.0",
+  "description": "Loteria Dorada en línea",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hernanreiq/golden-lottery.git"
+  },
+  "keywords": [
+    "loteria",
+    "lottery",
+    "golden",
+    "dorada",
+    "online",
+    "en",
+    "línea"
+  ],
+  "author": "Hernan.Reiq",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hernanreiq/golden-lottery/issues"
+  },
+  "homepage": "https://github.com/hernanreiq/golden-lottery#readme",
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
