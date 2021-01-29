@@ -26,7 +26,13 @@ var inicializadorIntervalo = setInterval(() => {
     if (inicializadorSorteo == 0){
         proximo_sorteo.innerText = '0' + inicializadorSorteo + 's';
         //OFRECER LOS RESULTADOS ACTUALES AL USUARIO Y ASIGNAR GANANCIAS 
+        contenedor_alertas.innerHTML = '';
         elegirGanadores();
+        limpiadorCombinaciones();
+        if (combinaciones_usuario.length > 0){
+            analizarJugadasGanadoras();
+        }
+        contenedor_botones_jugadas.style.visibility = "hidden";
         inicializadorSorteo--;
     } else if(inicializadorSorteo > 0){
         if (inicializadorSorteo <= 9){
@@ -39,9 +45,17 @@ var inicializadorIntervalo = setInterval(() => {
 }, 1000);
 
 var reiniciadorContador = setInterval(() => {
-    //REINICIAR TODO PARA UN NUEVO SORTEO
+    //REINICIAR TODO PARA UN NUEVO SORTEO 
+    id_carta_posicion = 0;
+    combinaciones_usuario = [];
+    historial_contenedor.innerHTML = '';
+    contenedor_botones_jugadas.style.visibility = "visible";
     inicializadorSorteo = 15;
-}, 20000);
+}, 30000);
+/*
+    CONTENEDOR DE LOS BOTONES DONDE EL USUARIO HACE SUS JUGADAS
+*/
+var contenedor_botones_jugadas = document.getElementById('botones-jugadas');
 
 /*
     ESTE BLOQUE DE CODIGO LANZA LOS 3 NUMEROS ALEATORIOS Y LOS PINTA EN PANTALLA
@@ -84,6 +98,7 @@ function elegirGanadores(){
     ESTE BLOQUE DE CODIGO DETERMINA QUE BOTON SE PRESIONO PARA CREAR LA COMBINACION DEL USUARIO
 */
 var combinacion_actual_usuario = [ null, null, null, false, false, false];
+var combinaciones_usuario = [];
 
 function determinarCombinacion(boton_presionado){
     if(boton_presionado <= 9 || boton_presionado == 0){
@@ -121,7 +136,6 @@ function eleccionDiferente(boton_presionado){
         combinacion_actual_usuario[5] == false) {
         determinarCombinacion(boton_presionado);
     } else {
-        console.log(combinacion_actual_usuario);
         alertador(1, 3);
     }
 }
@@ -131,7 +145,7 @@ function eleccionDiferente(boton_presionado){
 */
 var contenedor_alertas = document.getElementById('alertas');
 var tipo_alerta = ['¡NÚMERO ELEGIDO!', '¡POSICIONES LLENAS!', '¡CAMPO VACÍO!', '¡FELICIDADES!', '¡NO PUEDE SER!', '¡JUGADA REALIZADA CON ÉXITO!', '¡RECARGA ACEPTADA!', '¡RECARGA RECHAZADA!'];
-var mensaje = ['Este número fue tu primera elección.', 'Este número fue tu segunda elección.', 'Este número fue tu tercera elección.', 'Todos los campos fueron completados.', 'Debes llenar todos los campos.', 'Has acertado un número en primera, ganaste <b>RD$60</b>.', 'Has acertado un número en segunda, ganaste <b>RD$20</b>.', 'Has acertado un número en tercera, ganaste <b>RD$1</b>.', 'Has acertado dos números, ganaste <b>RD$1,000</b>.', 'Has acertado tres números, ganaste <b>RD$20,000</b>.', 'Te has quedado sin dinero.', 'Te deseo la mejor de las suertes.', 'Has recargado <b>RD$210</b> con éxito.', 'Ya cuentas con dinero para jugar.'];
+var mensaje = ['Este número fue tu primera elección.', 'Este número fue tu segunda elección.', 'Este número fue tu tercera elección.', 'Todos los campos fueron completados.', 'Debes llenar todos los campos.', 'Has acertado un número en primera, ganaste <b>RD$63</b>.', 'Has acertado un número en segunda, ganaste <b>RD$21</b>.', 'Has acertado un número en tercera, ganaste <b>RD$7</b>.', 'Has acertado dos números, ganaste <b>RD$1,050</b>.', 'Has acertado tres números, ganaste <b>RD$21,000</b>.', 'Te has quedado sin dinero.', 'Te deseo la mejor de las suertes.', 'Has recargado <b>RD$210</b> con éxito.', 'Ya cuentas con dinero para jugar.', 'Has acertado dos números, ganaste <b>RD$105</b>.'];
 
 function alertador(numero_alerta, numero_mensaje){
     if(numero_alerta == 0) {
@@ -143,7 +157,8 @@ function alertador(numero_alerta, numero_mensaje){
     }
     contenedor_alertas.innerHTML += `
     <div class="alert ${color_alerta} alert-dismissible fade show mt-2" role="alert">
-        <strong>${tipo_alerta[numero_alerta]}</strong> ${mensaje[numero_mensaje]}
+        <strong>${tipo_alerta[numero_alerta]}</strong>
+        <br>${mensaje[numero_mensaje]}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
         </button>
@@ -174,12 +189,17 @@ var historial_contenedor = document.getElementById('historial-contenedor');
 
 boton_hacer_jugada.addEventListener('click', crearTarjetaHistorial);
 
+var id_carta_posicion = 0;
 function crearTarjetaHistorial(){
+    var comprobar_saldo = saldo - 7;
     if (combinacion_actual_usuario[0] == null ||
         combinacion_actual_usuario[1] == null ||
         combinacion_actual_usuario[2] == null) {
             alertador(2, 4);
-        } else if (saldo > 0){
+        } else if (comprobar_saldo >= 0){
+            combinaciones_usuario.push(combinacion_actual_usuario[0]);
+            combinaciones_usuario.push(combinacion_actual_usuario[1]);
+            combinaciones_usuario.push(combinacion_actual_usuario[2]);
             if(combinacion_actual_usuario[0] <= 9){
                 var primera = '0' + combinacion_actual_usuario[0];
             } else {
@@ -198,16 +218,17 @@ function crearTarjetaHistorial(){
             historial_contenedor.innerHTML += `
             <div class="card my-2 bg-dark">
                 <div class="card-body mx-auto my-0">
-                    <span class="bg-secondary text-white rounded-circle px-3 p-2 h5 mx-1">${primera}</span>
-                    <span class="bg-secondary text-white rounded-circle px-3 p-2 h5 mx-1">${segunda}</span>
-                    <span class="bg-secondary text-white rounded-circle px-3 p-2 h5 mx-1">${tercera}</span>
+                    <span class="bg-secondary text-white rounded-circle px-3 p-2 h5 mx-1" id="jugada-${id_carta_posicion + 1}">${primera}</span>
+                    <span class="bg-secondary text-white rounded-circle px-3 p-2 h5 mx-1" id="jugada-${id_carta_posicion + 2}">${segunda}</span>
+                    <span class="bg-secondary text-white rounded-circle px-3 p-2 h5 mx-1" id="jugada-${id_carta_posicion + 3}">${tercera}</span>
                 </div>
             </div>
-            `;
+            `;  
+            id_carta_posicion += 3;
             limpiadorCombinaciones();
             alertador(5, 11);
             actualizarSaldo();
-        } else if (saldo == 0){
+        } else if (comprobar_saldo <= 0){
             alertador(4, 10);
         }
 }
@@ -288,4 +309,90 @@ function recargarSaldo(){
     } else {
         alertador(7, 13);
     }
+}
+
+/*
+    EN ESTE BLOQUE DE CODIGO SE VA A ANALIZAR CUALES JUGADAS FUERON LAS GANADORAS
+*/
+var ganador_tripleta = {
+    primera: false,
+    segunda: false,
+    tercera: false
+}
+
+function analizarJugadasGanadoras(){
+    var i_comprobaciones = combinaciones_usuario.length / 3;
+    var limite_i = 2;
+    var inicio_i = 0;
+    var id_tajerta = 1;
+    for(var ind = 1; ind <= i_comprobaciones; ind++){
+        for(var i = inicio_i; i <= limite_i; i++){
+            /* SE COMPRUEBA SI EL NUMERO JUGADO POR EL USUARIO SALIO EN PRIMERA, SEGUNDA O TERCERA, LUEGO SE PROCEDE A PINTARLO */
+            if(combinaciones_usuario[i] == ganadores_actuales.primera){
+                ganador_tripleta.primera = true;
+                id_carta_modificar = 'jugada-' + id_tajerta;
+                document.getElementById(id_carta_modificar).classList.remove('bg-secondary');
+                document.getElementById(id_carta_modificar).classList.add('bg-success');
+            } else if (combinaciones_usuario[i] == ganadores_actuales.segunda){
+                ganador_tripleta.segunda = true;
+                id_carta_modificar = 'jugada-' + id_tajerta;
+                document.getElementById(id_carta_modificar).classList.remove('bg-secondary');
+                document.getElementById(id_carta_modificar).classList.add('bg-success');
+            } else if (combinaciones_usuario[i] == ganadores_actuales.tercera){
+                ganador_tripleta.tercera = true;
+                id_carta_modificar = 'jugada-' + id_tajerta;
+                document.getElementById(id_carta_modificar).classList.remove('bg-secondary');
+                document.getElementById(id_carta_modificar).classList.add('bg-success');
+            }
+            id_tajerta += 1;
+        }
+        /*
+            LUEGO DE HABER COMPROBADO LA PRIMERA JUGADA QUE TIENE 3 NUMEROS, SE DECIDE A COMPROBAR SI EL JUGADOR ACERTO EN TODAS LAS POSICIONES, EN SOLO 2 O SOLO 1,
+            EN CASO DE HACERLO SE LANZA UNA ALERTA QUE DIGA CUAL ES SU PREMIO Y TAMBIEN SE LE ASIGNA EL DINERO GANADO A SU SALDO
+        */
+        if (ganador_tripleta.primera && ganador_tripleta.segunda && ganador_tripleta.tercera){
+            ganador_tripleta.primera = false;
+            ganador_tripleta.segunda = false;
+            ganador_tripleta.tercera = false;
+            alertador(3, 9);
+            saldo += 21000;
+            saldo_valor.innerHTML = saldo;
+        }else if(ganador_tripleta.primera && ganador_tripleta.segunda){
+            ganador_tripleta.primera = false;
+            ganador_tripleta.segunda = false;
+            alertador(3, 8);
+            saldo += 1050;
+            saldo_valor.innerHTML = saldo;
+        }else if (ganador_tripleta.primera && ganador_tripleta.tercera){
+            ganador_tripleta.primera = false;
+            ganador_tripleta.tercera = false;
+            alertador(3, 8);
+            saldo += 1050;
+            saldo_valor.innerHTML = saldo;
+        }else if (ganador_tripleta.segunda && ganador_tripleta.tercera){
+            ganador_tripleta.segunda = false;
+            ganador_tripleta.tercera = false;
+            alertador(3, 14);
+            saldo += 105;
+            saldo_valor.innerHTML = saldo;
+        } else if (ganador_tripleta.primera){
+            ganador_tripleta.primera = false;
+            alertador(3, 5);
+            saldo += 63;
+            saldo_valor.innerHTML = saldo;
+        } else if(ganador_tripleta.segunda){
+            ganador_tripleta.segunda = false;
+            alertador(3, 6);
+            saldo += 21;
+            saldo_valor.innerHTML = saldo;
+        } else if (ganador_tripleta.tercera){
+            ganador_tripleta.tercera = false;
+            alertador(3, 7);
+            saldo += 7;
+            saldo_valor.innerHTML = saldo;
+        }            
+        inicio_i += 3;
+        limite_i += 3; 
+    }
+    
 }
