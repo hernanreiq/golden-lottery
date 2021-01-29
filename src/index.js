@@ -14,8 +14,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(require('./routes/'));
 
 //static files
+app.use(express.static(path.join(__dirname, 'public')));
 
 //listening
 app.listen(app.get('port'), () => {
-    console.log('Servidor online en el puerto: '.green, app.get('port'));
+    console.log('Servidor online en el puerto:'.blue, app.get('port'));
 });
