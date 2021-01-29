@@ -1,6 +1,7 @@
 /*
     EN ESTE BLOQUE DE CÓDIGO SE CREAN LOS BOTONES QUE LE PERMITEN AL USUARIO HACER COMBINACIONES
 */
+document.getElementById('texto-alterno-sorteo').style.visibility = 'hidden';
 var contenedor_botones_combinacion = document.getElementById('contenedor-botones-combinacion');
 const cantidad_botones = 99;
 
@@ -20,11 +21,11 @@ creadorBotones();
     TEMPORIZADOR QUE DETERMINA CADA CUANTO TIEMPO SE REALIZA UN SORTEO
 */
 var proximo_sorteo = document.getElementById('proximo-sorteo');
-var inicializadorSorteo = 15;
+var inicializadorSorteo = 40;
 
 var inicializadorIntervalo = setInterval(() => {
     if (inicializadorSorteo == 0){
-        proximo_sorteo.innerText = '0' + inicializadorSorteo + 's';
+        proximo_sorteo.innerText = '00s';
         //OFRECER LOS RESULTADOS ACTUALES AL USUARIO Y ASIGNAR GANANCIAS 
         contenedor_alertas.innerHTML = '';
         elegirGanadores();
@@ -32,6 +33,8 @@ var inicializadorIntervalo = setInterval(() => {
         if (combinaciones_usuario.length > 0){
             analizarJugadasGanadoras();
         }
+        document.getElementById('texto-proximo-sorteo').style.visibility = 'hidden';
+        document.getElementById('texto-alterno-sorteo').style.visibility = 'visible';
         contenedor_botones_jugadas.style.visibility = "hidden";
         inicializadorSorteo--;
     } else if(inicializadorSorteo > 0){
@@ -49,9 +52,14 @@ var reiniciadorContador = setInterval(() => {
     id_carta_posicion = 0;
     combinaciones_usuario = [];
     historial_contenedor.innerHTML = '';
+    cantidad_jugadas_actuales.innerText = 0;
+    jugadas_actuales_badge = 0;
+    contenedor_alertas.innerHTML = '';
+    document.getElementById('texto-proximo-sorteo').style.visibility = 'visible';
+    document.getElementById('texto-alterno-sorteo').style.visibility = 'hidden';
     contenedor_botones_jugadas.style.visibility = "visible";
-    inicializadorSorteo = 15;
-}, 30000);
+    inicializadorSorteo = 40;
+}, 60000);
 /*
     CONTENEDOR DE LOS BOTONES DONDE EL USUARIO HACE SUS JUGADAS
 */
@@ -156,7 +164,7 @@ function alertador(numero_alerta, numero_mensaje){
         var color_alerta = 'alert-success';
     }
     contenedor_alertas.innerHTML += `
-    <div class="alert ${color_alerta} alert-dismissible fade show mt-2" role="alert">
+    <div class="alert ${color_alerta} alert-dismissible fade show mt-2 shadow-sm" role="alert">
         <strong>${tipo_alerta[numero_alerta]}</strong>
         <br>${mensaje[numero_mensaje]}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -186,6 +194,8 @@ var boton_hacer_jugada = document.getElementById('hacer-jugada');
 var boton_cancelar_jugada = document.getElementById('cancelar-jugada');
 var jugadas_realizadas_tarjetas = [];
 var historial_contenedor = document.getElementById('historial-contenedor');
+var cantidad_jugadas_actuales = document.getElementById('cantidad-jugadas-actuales');
+var jugadas_actuales_badge = 0;
 
 boton_hacer_jugada.addEventListener('click', crearTarjetaHistorial);
 
@@ -217,7 +227,7 @@ function crearTarjetaHistorial(){
             }
             historial_contenedor.innerHTML += `
             <div class="card my-2 bg-dark">
-                <div class="card-body mx-auto my-0">
+                <div class="card-body mx-auto my-0 shadow-sm">
                     <span class="bg-secondary text-white rounded-circle px-3 p-2 h5 mx-1" id="jugada-${id_carta_posicion + 1}">${primera}</span>
                     <span class="bg-secondary text-white rounded-circle px-3 p-2 h5 mx-1" id="jugada-${id_carta_posicion + 2}">${segunda}</span>
                     <span class="bg-secondary text-white rounded-circle px-3 p-2 h5 mx-1" id="jugada-${id_carta_posicion + 3}">${tercera}</span>
@@ -225,6 +235,8 @@ function crearTarjetaHistorial(){
             </div>
             `;  
             id_carta_posicion += 3;
+            jugadas_actuales_badge += 1;
+            cantidad_jugadas_actuales.innerText = jugadas_actuales_badge;
             limpiadorCombinaciones();
             alertador(5, 11);
             actualizarSaldo();
@@ -394,5 +406,4 @@ function analizarJugadasGanadoras(){
         inicio_i += 3;
         limite_i += 3; 
     }
-    
 }

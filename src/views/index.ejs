@@ -6,10 +6,10 @@
 <body>
    <%- include ('partials/header.html') %>
     <main>
-        <div class="container">
+        <div class="container py-3 my-5 rounded" id="container-main">
             <div class="row my-2">
                 <div class="col-xl-12">
-                    <h2 class="text-center my-auto bg-secondary text-light">Alertas</h2>
+                    <h2 class="text-center my-auto bg-secondary text-light rounded shadow-sm">Alertas</h2>
                     <div id="alertas">
         
                     </div>
@@ -17,33 +17,34 @@
             </div>
             <div class="row">
                 <div class="col-xl-9 "> 
-                    <h2 class="text-center my-auto bg-info text-light">Próximo sorteo en: <span id="proximo-sorteo"></span></h2>
-                    <h2 class="py-3 text-center">Resultados del último sorteo</h2>
+                    <h2 class="text-center my-auto bg-info text-light rounded shadow-sm" id="texto-proximo-sorteo">Próximo sorteo en: <span id="proximo-sorteo"></span></h2>
+                    <h2 class="text-center my-auto bg-warning text-light rounded py-3 shadow-sm" id="texto-alterno-sorteo">Debes esperar el próximo sorteo</h2>
+                    <h2 class="py-3 text-center text-white rounded">Resultados del último sorteo</h2>
                     <div class="container-fluid  justify-content-center align-center my-4 mb-5 text-center">
                         <div class="mx-1  d-inline">
-                            <span class="bg-success text-white rounded-circle px-3 p-2 h4" id="primer-ganador">00</span>
+                            <span class="bg-success text-white rounded-circle px-3 p-2 h4 shadow-sm" id="primer-ganador">00</span>
                         </div>
                         <div class="mx-1  d-inline">
-                            <span class="bg-success text-white rounded-circle px-3 p-2 h4" id="segundo-ganador">00</span>
+                            <span class="bg-success text-white rounded-circle px-3 p-2 h4 shadow-sm" id="segundo-ganador">00</span>
                         </div>
                         <div class="mx-1  d-inline">
-                            <span class="bg-success text-white rounded-circle px-3 p-2 h4" id="tercer-ganador">00</span>
+                            <span class="bg-success text-white rounded-circle px-3 p-2 h4 shadow-sm" id="tercer-ganador">00</span>
                         </div>
                     </div>
-                    <h2 class="text-center my-auto bg-info">Haz una combinación</h2>
+                    <h2 class="text-center my-auto bg-info text-white rounded shadow-sm">Haz una combinación</h2>
                     <div class="container-fluid my-1 mb-4 text-center" id="contenedor-botones-combinacion">
                         <!-- BOTONES PARA HACER LAS COMBINACIONES SE GENERAN CON JAVASCRIPT -->
                     </div>
-                    <h2 class="text-center my-auto bg-info">Combinación seleccionada</h2>
+                    <h2 class="text-center my-auto bg-info text-white rounded shadow-sm">Combinación seleccionada</h2>
                     <div class="container-fluid  justify-content-center align-center my-4 mb-5 text-center">
                         <div class="mx-1  d-inline">
-                            <span class="bg-warning text-white rounded-circle px-3 p-2 h4" id="combinacion-1">&nbsp;&nbsp;</span>
+                            <span class="bg-warning text-white rounded-circle px-3 p-2 h4 shadow-sm" id="combinacion-1">&nbsp;&nbsp;</span>
                         </div>
                         <div class="mx-1  d-inline">
-                            <span class="bg-warning text-white rounded-circle px-3 p-2 h4" id="combinacion-2">&nbsp;&nbsp;</span>
+                            <span class="bg-warning text-white rounded-circle px-3 p-2 h4 shadow-sm" id="combinacion-2">&nbsp;&nbsp;</span>
                         </div>
                         <div class="mx-1  d-inline">
-                            <span class="bg-warning text-white rounded-circle px-3 p-2 h4" id="combinacion-3">&nbsp;&nbsp;</span>
+                            <span class="bg-warning text-white rounded-circle px-3 p-2 h4 shadow-sm" id="combinacion-3">&nbsp;&nbsp;</span>
                         </div>
                     </div>
                     <div class="container-fluid my-3">
@@ -58,10 +59,10 @@
                     </div>
                 </div>
                 <div class="col-xl-3 ">
-                    <h2 class="text-center my-auto bg-success">Saldo</h2>
-                    <h2 class="text-center mt-5">RD$<span id="saldo-valor"></span></h2>
+                    <h2 class="text-center my-auto bg-success text-white rounded shadow-sm">Saldo</h2>
+                    <h2 class="text-center text-white mt-5">RD$<span id="saldo-valor"></span></h2>
                     <button class="btn btn-success w-100 my-5" id="recargar-saldo">RECARGAR</button>
-                    <h2 class="text-center my-auto bg-warning h4 p-3">Historial de jugadas</h2>  
+                    <h2 class="text-center my-auto bg-warning h4 p-3 rounded shadow-sm text-white">Historial <span class="badge badge-info" id="cantidad-jugadas-actuales">0</span></h2>  
                     <div id="historial-contenedor">
                     <!-- TARJETAS CON EL HISTORIAL DE JUGADAS HECHAS POR EL USUARIO GENERADOS CON JAVASCRIPT  -->
                     </div>

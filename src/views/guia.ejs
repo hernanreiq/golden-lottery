@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include ('partials/head.html') %>
+</head>
+<body>
+    <%- include ('partials/header.html') %>
+    <main id="main-guia">
+        <div class="container">
+            <div class="accordion mt-5" id="accordionExample">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                       ¿Cómo puedo jugar?
+                      </button>
+                    </h2>
+                  </div>     
+                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                      Sólo debes seleccionar 3 números de tu preferencia y hacer clic en el botón <button class="btn btn-success btn-sm my-1">HACER ESTA JUGADA</button>, inicias con RD$210 que te sirven para hacer 30 jugadas, cada una cuesta RD$7, al terminarse el dinero le das al botón de <button class="btn btn-success btn-sm my-1">RECARGAR</button> y tu saldo vuelve a tener RD$210. No necesitas ingresar datos personales ni bancarios para poder jugar.
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header" id="headingTwo">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        ¿Por qué me descuenta RD$7 por cada jugada que hago?
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                      Esto sucede porque para ahorrar código se da por hecho que cada combinación de 3 te da chance de ganar todos los premios disponibles, siempre y cuando aciertes entre 1 y 3 números de los que seleccionaste. También porque si fueras a jugar quinielas, te darías cuenta que es el mismo monto si decides hacer combinaciones con los 3 numeros seleccionados. <br>
+                      <br>
+                      Imagina que tienes seleccionado 10, 20 y 30. Estas son las 7 jugadas posibles que puedes hacer: <br>
+                      <ul>
+                          <li>Todos juntos: (10 - 20 - 30).</li>
+                          <li>Combinaciones de 2: (10 - 20), (10 - 30), (20 - 30).</li>
+                          <li>Jugando cada número por separado: (10), (20), (30).</li>
+                      </ul>  
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header" id="headingThree">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        ¿Cuánto gano por acertar?
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        Eso va a variar dependiendo de cuantos aciertos hagas y la posición de los mismos respecto a los número ganadores. <br><br>
+                        <ul>
+                            <li>Acertando un sólo número: Primera posición paga RD$63, Segunda posición paga RD$21, Tercera posición paga RD$7.</li>
+                            <li>Acertando 2 números: Primera y segunda posición paga RD$1,050, Primera y tercera posición paga RD$1,050, Segunda y tercera posición paga RD$105.</li>
+                            <li>Acertando los 3 números: No importa el orden, ganas RD$21,000.</li>
+                        </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingFour">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            ¿Puedo retirar el dinero que gané?
+                            </button>
+                        </h2>
+                    </div>
+                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                            <div class="card-body">
+                                El dinero que se maneja en la plataforma es ficticio, todo el proyecto se realizó sin fines de lucro, por lo que no es posible retirar el dinero.
+                            </div>
+                        </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingFive">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            ¿Cómo sé si gané?
+                            </button>
+                        </h2>
+                    </div>
+                        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                            <div class="card-body">
+                                En el historial de las jugadas realizadas podrás ver los números que acertaste pintados de verde. Además recibirás una o varias alertas avisando del dinero que acabas de ganar, el mismo se añade a tu cuenta automáticamente.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <%- include ('partials/footer.html')%>
+</body>
+</html>
