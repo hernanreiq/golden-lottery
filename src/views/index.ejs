@@ -44,25 +44,21 @@
                     <div class="container-fluid my-3">
                         <div class="row">
                             <div class="col-md-6 my-1">
-                                <button class="btn btn-success w-100">HACER ESTA JUGADA</button>
+                                <button class="btn btn-success w-100" id="hacer-jugada">HACER ESTA JUGADA</button>
                             </div>
                             <div class="col-md-6 my-1">
-                                <button class="btn btn-danger w-100">CANCELAR LA JUGADA</button>
+                                <button class="btn btn-danger w-100" id="cancelar-jugada">CANCELAR LA JUGADA</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 ">
                     <h2 class="text-center my-auto bg-success">Saldo</h2>
-                    <h2 class="text-center mt-5">RD$<span>200</span></h2>
-                    <button class="btn btn-success w-100 my-5">RECARGAR</button>
+                    <h2 class="text-center mt-5">RD$<span id="saldo-valor"></span></h2>
+                    <button class="btn btn-success w-100 my-5" id="recargar-saldo">RECARGAR</button>
                     <h2 class="text-center my-auto bg-warning h4 p-3">Historial de jugadas</h2>  
-                    <div class="card my-2 bg-dark">
-                        <div class="card-body mx-auto my-0">
-                            <span class="bg-secondary text-white rounded-circle px-3 p-2 h5 mx-1">&nbsp;&nbsp;</span>
-                            <span class="bg-secondary text-white rounded-circle px-3 p-2 h5 mx-1">&nbsp;&nbsp;</span>
-                            <span class="bg-secondary text-white rounded-circle px-3 p-2 h5 mx-1">&nbsp;&nbsp;</span>
-                        </div>
+                    <div id="historial-contenedor">
+                    <!-- TARJETAS CON EL HISTORIAL DE JUGADAS HECHAS POR EL USUARIO GENERADOS CON JAVASCRIPT  -->
                     </div>
                 </div>
             </div>
