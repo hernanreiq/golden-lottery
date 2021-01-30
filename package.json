@@ -4,9 +4,7 @@
   "description": "Loteria Dorada en línea",
   "main": "index.js",
   "scripts": {
-    "start": "node src",
-    "dev": "nodemon src",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -29,7 +27,6 @@
   "homepage": "https://github.com/hernanreiq/golden-lottery#readme",
   "dependencies": {
     "animate.css": "^4.1.1",
-    "colors": "^1.4.0",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "morgan": "^1.10.0",
