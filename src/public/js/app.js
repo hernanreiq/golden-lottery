@@ -8,9 +8,9 @@ const cantidad_botones = 99;
 function creadorBotones(){
     for(var i = 0; i <= cantidad_botones; i++){
         if(i < 10){
-            contenedor_botones_combinacion.innerHTML += '<button class="btn btn-secondary m-1" onclick="eleccionDiferente(0'+i+')" id="boton-0'+i+'">' + '0' + i + '</button>';
+            contenedor_botones_combinacion.innerHTML += '<button class="btn btn-secondary m-1 animate__animated animate__flipInX" onclick="eleccionDiferente(0'+i+')" id="boton-0'+i+'">' + '0' + i + '</button>';
         } else {
-            contenedor_botones_combinacion.innerHTML += '<button class="btn btn-secondary m-1" onclick="eleccionDiferente('+i+')" id="boton-'+i+'">' + i + '</button>';
+            contenedor_botones_combinacion.innerHTML += '<button class="btn btn-secondary m-1 animate__animated animate__flipInX" onclick="eleccionDiferente('+i+')" id="boton-'+i+'">' + i + '</button>';
         }
     }
 }
@@ -79,9 +79,9 @@ var ganadores_actuales = {
 };
 
 function elegirGanadores(){
-    ganadores_actuales.primera = Math.floor(Math.random() * 99);
-    ganadores_actuales.segunda = Math.floor(Math.random() * 99);
-    ganadores_actuales.tercera = Math.floor(Math.random() * 99);
+    ganadores_actuales.primera = Math.floor(Math.random() * 100);
+    ganadores_actuales.segunda = Math.floor(Math.random() * 100);
+    ganadores_actuales.tercera = Math.floor(Math.random() * 100);
     //PRIMERA
     if(ganadores_actuales.primera <= 9){
         primer_ganador.innerText = '0' + ganadores_actuales.primera;
@@ -164,7 +164,7 @@ function alertador(numero_alerta, numero_mensaje){
         var color_alerta = 'alert-success';
     }
     contenedor_alertas.innerHTML += `
-    <div class="alert ${color_alerta} alert-dismissible fade show mt-2 shadow-sm" role="alert">
+    <div class="alert ${color_alerta} alert-dismissible fade show mt-2 shadow-sm animate__animated animate__bounceIn" role="alert">
         <strong>${tipo_alerta[numero_alerta]}</strong>
         <br>${mensaje[numero_mensaje]}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
